@@ -1,0 +1,50 @@
+{% extends 'groups/group_base.html' %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'BMEforum/css/group_list.css' %}">
+
+{% block pregroup %}
+
+<div class="col-md-4">
+    <div class="content">
+        <br>
+        {% if user.is_authenticated %}
+            <a href="{% url 'posts:for_user' username=user.username %}"><h1>@{{ user.username }}</h1></a>
+            <h1 style="color: #fadd5a;">Welcome Back!!!</h1>
+            <p>Check out the groups or create a new group!</p>
+        {% else %}
+            <h1>Log in and join us!</h1>
+        {% endif %}
+
+    </div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'groups:create' %}" class="btn btn-outline-warning">Create New Group</a>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+
+{% block group_content %}
+<div class="col-md-8 list_layout">
+    <br>
+    <div class="list-group">
+        {% for group in object_list %}
+            <a class='list-group-item' href="{% url 'groups:single' slug=group.slug %}">
+                <h3 class="mb-1">{{ group.name }}</h3>
+                <p class="mb-1">{{ group.description_html|safe }}</p>
+                <h3 class="badge bg-warning rounded-pill">{{ group.members.count }}</h3>
+                    member{{ group.members.count|pluralize }}
+
+                <h3 class="badge bg-warning rounded-pill">{{group.posts.count }}</h3>
+                    post{{group.posts.count|pluralize}}
+
+                {% if user in group.members.all %}
+                    <h3 class="bi bi-person-check-fill" style="float:right;"></h3>
+                {% else %}
+                    <h3 class="bi bi-person-x-fill" style="float:right;"></h3>
+                {% endif %}
+            </a>
+        {% endfor %}      
+    </div>
+</div>
+{% endblock %}

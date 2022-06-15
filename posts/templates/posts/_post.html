@@ -1,0 +1,23 @@
+<h1></h1>
+
+<h4>{{ post.message_html|safe }}</h4>
+<p>in Group: <a href="{% url 'groups:single' slug=post.group.slug %}">{{post.group|safe}}</a></p>
+
+
+<small class="username">
+    <a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a>
+</small>
+
+<small class="time">
+    <a>{{ post.created_at }}</a>
+
+</small>
+
+{% if user.is_authenticated and post.user == user %}
+    <a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-outline-danger">
+        <small> Delete</small>
+    </a>
+{% endif %}
+<hr>
+
+

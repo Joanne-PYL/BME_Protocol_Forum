@@ -1,0 +1,33 @@
+{% extends 'posts/post_base.html' %}
+{% load bootstrap5 %}
+
+
+{% block prepost %}
+<div class="col-md-4">
+    <br>
+    <a href="{% url 'posts:for_user' username=user.username %}"><h1>@{{ user.username }}</h1></a>
+    <h1 style="color: #fadd5a;">Welcome Back!!!</h1> 
+    {% if request.user.is_authenticated %}
+        <h3 class="title">Your Groups</h3>
+        <div class="list-group">
+            {% for user_group in user_groups %}
+                <a class="list-group-item" href="{% url 'groups:single' slug=user_group.slug %}">{{ user_group.slug }}</a>
+            {% empty %}
+                <h5>no</h5>  
+            {% endfor %}
+        </div>
+    {% endif %}
+    <br>
+</div>
+
+{% endblock %}
+
+{% block post_content %}
+<div class="col-md-8">
+    <h1></h1>
+    <h3>Check out new posts!</h3>
+    {% for post in post_list %}
+        {% include 'posts/_post.html' %}
+    {% endfor %}
+</div>
+{% endblock %}

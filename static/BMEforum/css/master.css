@@ -1,0 +1,31 @@
+body{
+    background-color:black;
+    font-family: 'Roboto', sans-serif;
+    color:white;
+}
+.starwars{ 
+    font-family: 'Star Jedi', sans-serif; 
+    color: black;
+    -webkit-text-fill-color: black;  
+    -webkit-text-stroke-width: 1px;
+    letter-spacing: 5px;
+}
+
+.textoverflow{
+	word-break: break-all;
+ }
+
+ .jumbotron {
+	padding: 2rem 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+    color:black;
+  }
+
+  .list_layout {
+    position: relative;
+    display: block;
+    margin-top: 30px;
+}
